@@ -104,8 +104,6 @@ def main(
     print(offset)
     print(limit)
     print(stride)
-    print(len(shuffled_limit))
-    exit()
 
 
     print(f"Total number of items to process: {len(shuffled_limit)}")
@@ -116,6 +114,8 @@ def main(
         go_func = partial(run_inference, config=config)
 
         if config.num_workers not in [0, None]:
+            print(len(shuffled_limit))
+            exit()
             with multiprocessing.Pool(config.num_workers) as pool:
                 predictions = list(
                     tqdm(
