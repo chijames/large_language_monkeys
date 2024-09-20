@@ -104,6 +104,8 @@ def main(
     print(offset)
     print(limit)
     print(stride)
+    print(len(shuffled_limit))
+    exit()
 
 
     print(f"Total number of items to process: {len(shuffled_limit)}")
