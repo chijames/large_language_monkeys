@@ -113,13 +113,13 @@ def main(
             with multiprocessing.Pool(config.num_workers) as pool:
                 predictions = list(
                     tqdm(
-                        pool.imap_unordered(go_func, test_dataset),
-                        total=len(test_dataset),
+                        pool.imap_unordered(go_func, shuffled_limit),
+                        total=len(shuffled_limit),
                     )
                 )
         else:
             predictions = []
-            for item in tqdm(test_dataset):
+            for item in tqdm(shuffled_limit):
                 predictions.append(go_func(item))
 
 
