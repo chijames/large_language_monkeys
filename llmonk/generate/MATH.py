@@ -101,6 +101,10 @@ def main(
         offset = 0
 
     shuffled_limit = shuffled_limit[offset:limit:stride]
+    print(offset)
+    print(limit)
+    print(stride)
+
 
     print(f"Total number of items to process: {len(shuffled_limit)}")
 
