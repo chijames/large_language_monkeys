@@ -27,6 +27,9 @@ def run_inference(item, config: GenerateScriptConfig):
     assert num_samples % batch_size == 0
 
     samples = []
+    logprobs = []
+    cumulative_logprob = []
+
     for _ in tqdm(range(num_samples // batch_size), desc=f"Item {item['id']}"):
 
         body = {
@@ -41,15 +44,17 @@ def run_inference(item, config: GenerateScriptConfig):
 
         response = requests.post(url, json=body)
         respj = response.json()
-        print(respj)
-        exit()
         samples.extend(respj["text"])
+        logprobs.extend(respj["logprobs"])
+        cumulative_logprob.extend(respj["cumulative_logprob"])
 
     out = {
         "prompt": prompt,
         "question": item["problem"],
         "samples": samples,
         "gt_answer": item["solution"],
+        "logprobs": logprobs,
+        "cumulative_logprob": cumulative_logprob,
     }
 
     save_yaml(outpath, out)
