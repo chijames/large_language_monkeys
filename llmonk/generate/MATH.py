@@ -41,6 +41,8 @@ def run_inference(item, config: GenerateScriptConfig):
 
         response = requests.post(url, json=body)
         respj = response.json()
+        print(respj)
+        exit()
         samples.extend(respj["text"])
 
     out = {
